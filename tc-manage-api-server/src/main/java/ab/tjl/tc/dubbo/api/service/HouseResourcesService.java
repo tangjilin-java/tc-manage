@@ -1,0 +1,32 @@
+package ab.tjl.tc.dubbo.api.service;
+
+import ab.tjl.tc.dubbo.api.vo.Pagination;
+import ab.tjl.tc.dubbo.api.vo.TableResult;
+import ab.tjl.tc.dubbo.server.api.ApiHouseResourcesService;
+import ab.tjl.tc.dubbo.server.pojo.HouseResources;
+import ab.tjl.tc.dubbo.server.vo.PageInfo;
+import com.alibaba.dubbo.config.annotation.Reference;
+import org.springframework.stereotype.Service;
+
+/**
+ * @Author:TangJiLin
+ * @Description:api房源业务
+ * @Date: Created in 2019/11/24 14:50
+ * @Modified By:
+ */
+@Service
+public class HouseResourcesService {
+    @Reference(version = "1.0.0")
+    private ApiHouseResourcesService apiHouseResourcesService;
+
+    public boolean save(HouseResources houseResources){
+        int result = this.apiHouseResourcesService.saveHouseResources(houseResources);
+        return result == 1;
+    }
+
+    public TableResult<HouseResources> queryList(HouseResources houseResources, Integer currentPage, Integer pageSize) {
+        PageInfo<HouseResources> pageInfo = this.apiHouseResourcesService.queryHouseResourcesList(currentPage, pageSize, houseResources);
+
+        return new TableResult<>(pageInfo.getRecords(),new Pagination(currentPage,pageSize,pageInfo.getTotal()));
+    }
+}
