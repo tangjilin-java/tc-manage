@@ -5,10 +5,11 @@ import lombok.Data;
 
 import java.util.Collections;
 import java.util.List;
+
 /**
  * @Author:TangJiLin
- * @Description: 分页
- * @Date: Created in 2019/11/26 13:41
+ * @Description:
+ * @Date: Created in 2019/11/28 17:10
  * @Modified By:
  */
 @Data
@@ -32,4 +33,3 @@ public class PageInfo<T> implements java.io.Serializable{
      */
     private List<T> records = Collections.emptyList();
 }
-

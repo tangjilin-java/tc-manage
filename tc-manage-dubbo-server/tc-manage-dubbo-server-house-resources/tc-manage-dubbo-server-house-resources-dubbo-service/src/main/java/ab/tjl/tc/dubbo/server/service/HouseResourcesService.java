@@ -18,6 +18,28 @@ public interface HouseResourcesService {
      */
     int saveHouseResources(HouseResources houseResources);
 
+    /**
+     * 分页房源
+     * @param page
+     * @param pageSize
+     * @param queryCondition
+     * @return
+     */
     PageInfo<HouseResources> queryHouseResourcesList(int page, int pageSize, HouseResources queryCondition);
+
+    /**
+     * 根据房源id查询房源数据
+     * @param id
+     * @return
+     */
+    HouseResources queryHouseResourcesById(Long id);
+
+    /**
+     * 修改房源
+     *
+     * @param houseResources
+     * @return
+     */
+    boolean updateHouseResources(HouseResources houseResources);
 }
 

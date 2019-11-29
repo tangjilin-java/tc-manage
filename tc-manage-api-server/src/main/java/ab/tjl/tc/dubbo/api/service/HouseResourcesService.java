@@ -25,8 +25,22 @@ public class HouseResourcesService {
     }
 
     public TableResult<HouseResources> queryList(HouseResources houseResources, Integer currentPage, Integer pageSize) {
-        PageInfo<HouseResources> pageInfo = this.apiHouseResourcesService.queryHouseResourcesList(currentPage, pageSize, houseResources);
+        PageInfo<HouseResources> pageInfo = this.apiHouseResourcesService.
+                queryHouseResourcesList(currentPage, pageSize, houseResources);
+        return new TableResult<>(pageInfo.getRecords(), new Pagination(currentPage, pageSize, pageInfo.getTotal()));
+    }
 
-        return new TableResult<>(pageInfo.getRecords(),new Pagination(currentPage,pageSize,pageInfo.getTotal()));
+    /**
+     * 根据房源id查询房源数据
+     * @param id
+     * @return
+     */
+    public HouseResources queryHouseResourceById(Long id){
+        //调用dubbo中的服务进行查询数据
+        return this.apiHouseResourcesService.queryHouseResourcesById(id);
+    }
+
+    public boolean update(HouseResources houseResources) {
+        return this.apiHouseResourcesService.updateHouseResources(houseResources);
     }
 }

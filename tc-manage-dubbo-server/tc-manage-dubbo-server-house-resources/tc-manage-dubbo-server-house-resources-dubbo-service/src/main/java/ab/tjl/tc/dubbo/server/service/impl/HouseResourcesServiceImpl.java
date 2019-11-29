@@ -1,6 +1,7 @@
 package ab.tjl.tc.dubbo.server.service.impl;
 
 import ab.tjl.tc.dubbo.server.pojo.HouseResources;
+import ab.tjl.tc.dubbo.server.service.BaseServiceImpl;
 import ab.tjl.tc.dubbo.server.service.HouseResourcesService;
 import ab.tjl.tc.dubbo.server.vo.PageInfo;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -30,13 +31,22 @@ public class HouseResourcesServiceImpl extends BaseServiceImpl<HouseResources> i
 
 
     @Override
-    public PageInfo<HouseResources> queryHouseResourcesList(int page, int pageSize, HouseResources queryCondition) {
-        QueryWrapper queryWrapper = new QueryWrapper();
-
+    public PageInfo<HouseResources> queryHouseResourcesList(int page, int pageSize,HouseResources queryCondition) {
+        QueryWrapper<HouseResources> queryWrapper = new QueryWrapper<>(queryCondition);
+        // 根据数据的更新时间做倒序排序
         queryWrapper.orderByDesc("updated");
         IPage iPage = super.queryPageList(queryWrapper, page, pageSize);
+        return new PageInfo<HouseResources>(Long.valueOf(iPage.getTotal()).intValue() , page, pageSize, iPage.getRecords());
+    }
 
-        return new PageInfo<HouseResources>(Long.valueOf(iPage.getTotal()).intValue(),page,pageSize,iPage.getRecords());
+    @Override
+    public HouseResources queryHouseResourcesById(Long id) {
+        return super.queryById(id);
+    }
+
+    @Override
+    public boolean updateHouseResources(HouseResources houseResources) {
+        return super.update(houseResources) == 1;
     }
 }
 

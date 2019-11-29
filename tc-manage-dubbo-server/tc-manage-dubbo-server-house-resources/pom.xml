@@ -16,6 +16,11 @@
         <module>tc-manage-dubbo-server-house-resources-dubbo-service</module>
     </modules>
     <dependencies>
+        <dependency>
+            <groupId>ab.tjl.tc.manage</groupId>
+            <artifactId>tc-manage-dubbo-server-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     <dependency>
         <groupId>org.projectlombok</groupId>
         <artifactId>lombok</artifactId>

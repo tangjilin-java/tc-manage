@@ -1,4 +1,4 @@
-package ab.tjl.tc.dubbo.server.service.impl;
+package ab.tjl.tc.dubbo.server.service;
 
 import ab.tjl.tc.dubbo.server.pojo.BasePojo;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -73,12 +73,12 @@ public abstract class BaseServiceImpl<T extends BasePojo> {
      *
      * @param queryWrapper
      * @param page
-     * @param rows
+     * @param pageSize
      * @return
      */
-    public IPage<T> queryPageList(QueryWrapper<T> queryWrapper, Integer page, Integer rows) {
-    // 获取分页数据
-        return this.mapper.selectPage(new Page<T>(page, rows), queryWrapper);
+    public IPage<T> queryPageList(QueryWrapper<T> queryWrapper, Integer page,Integer pageSize) {
+        // 获取分页数据
+        return this.mapper.selectPage(new Page<T>(page, pageSize), queryWrapper);
     }
     /**
      * 保存数据
